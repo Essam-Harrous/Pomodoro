@@ -1,0 +1,32 @@
+#container {
+    text-align: center;
+    margin: 30px auto 0 auto;
+    width: 75%;
+}
+
+#pomodoro {
+    width: 60%;
+    border: 2px solid rgb(99, 93, 93);
+    border-radius: 10px;
+    margin: 60px auto 0 auto;
+}
+
+.information {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.inform {
+    border: 1px solid rgb(214, 214, 221);
+    border-radius: 8px;
+    padding: 5px 20px;
+    margin: 5px 15px;
+}
+
+#timer {
+    padding: 20% 20%;
+    margin: 10% 27%;
+    border: 2px solid rgb(71, 70, 70);
+    border-radius: 50%;
+}
