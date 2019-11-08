@@ -10,30 +10,41 @@
             <hr/>
             <div id="pomodoro">
                 <div class="information">
-                    <div class="inform">Full Pomodoro: <span id="fullPomodor">0</span></div>
+                    <div class="inform">Full Pomodoro: <span id="fullPomodoro">0</span></div>
                     <div class="inform">Pomodoro Part: <span id="pomodoroPart">0</span>/4</div>
                 </div>
-                <div id="timer-counter">
-                    <div id="timer">
-                        <input class="inform inputs" min="0" type="number" id="minutes" value="25">
-                        :
-                        <input class="inform inputs" min="0" type="number" id="secs" value="00">
+                <div class="container" id="timer-counter">
+                    <div class="box" id="timer">
+                        <div id="chart" class="chart" data-percent="100" data-scale-color="#ffb400">
+                            <input class="inform inputs" min="0" type="number" id="minutes" value="25">
+                            :
+                            <input class="inform inputs" min="0" max="59" type="number" id="secs" value="00">
+                        </div>
                     </div>
                 </div>
                 <div class="information">
-                    <button id="start">start</button>
-                    <button id="reset">reset</button>
-                    <button id="stop">stop</button>
+                    <button class="inform" id="start">start</button>
+                    <button class="inform" id="reset">reset</button>
+                    <button class="inform" id="stop">stop</button>
                 </div>
             </div>
             <audio id="alarm">
                 <source src="sound/alarm.mp3" type="audio/mpeg">
             </audio>
+            
         </div>
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script>
+        <script>
+            $(function() {
+                $('.chart').easyPieChart({
+                    barColor: '#ff5643'
+                });
+            });
+        </script>
         <script src="main.js"></script>
     </body>
 </html>

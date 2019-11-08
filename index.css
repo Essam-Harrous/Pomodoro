@@ -1,3 +1,6 @@
+body {
+    font-family: sans-serif;
+}
 #container {
     text-align: center;
     margin: 30px auto 0 auto;
@@ -9,6 +12,7 @@
     border: 2px solid rgb(99, 93, 93);
     border-radius: 10px;
     margin: 60px auto 0 auto;
+    background-color: #43ff8b;
 }
 
 .information {
@@ -22,21 +26,55 @@
     border-radius: 8px;
     padding: 5px 20px;
     margin: 5px 15px;
+    background-color: #ff437f;
+    font-size: 18px;
+
 }
 
 #timer {
     display: flex;
-    padding: 7rem 3rem;
+    padding: 6rem 4.1rem;
     margin: 8% 29%;
-    border: 2px solid rgb(71, 70, 70);
-    border-radius: 50%;
+
 }
 
 .inputs {
     width: 20px;
+    margin: 15px 4px;
+    z-index: 1;
+
 }
 
 .inputs::-webkit-inner-spin-button, 
 .inputs::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
+}
+
+
+.container .box {
+    width: 25%;
+    float: left;
+}
+
+.container .box .chart {
+    display: flex;
+    position: relative;
+    height: 110px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 30px;
+    line-height: 110px;
+}
+
+.container .box canvas {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: -70px;
+    left: -53px;
+    z-index: 0;
+}
+
+.inform:hover {
+    transform: scale(1.2);
 }
