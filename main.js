@@ -4,20 +4,27 @@ var $stopBtn = $('#stop');
 var $resetBtn = $('#reset')
 var $minutes = $('#minutes')
 var $secs = $('#secs')
+var pomodoro = 0;
 var timeLeft = 0;
+var workTime = 0;
+var breakTime = 0;
 var interva = 0;
+var firstClick = true;
 
 $startBtn.on('click', function(){
 	$stopBtn.removeAttr('disabled')
 	var minutes = $minutes.val();
 	var secs = $secs.val();
-	console.log( typeof $('#minutes').val(), /[e.+-]/.test(minutes) , secs, /[e.+-]/.test(secs))
-	// if (/[e.+-]/.test(minutes) || /[e.+-]/.test(secs)) {
-	// 	alert("don't do it again HIRs")
-	// }
+	if (/[e.+-]/.test(minutes) || /[e.+-]/.test(secs) || '' === secs || '' === minutes) {
+		alert("don't do it again HIRs")
+	}
     $startBtn.attr('disabled', 'true');
     $minutes.attr('disabled', 'true');
     $secs.attr('disabled', 'true');
+    if (firstClick) {
+	    workTime = timeInSecs(minutes, secs);
+    }
+    firstClick = false;
     timeLeft = timeInSecs(minutes, secs);
 
     interval = setInterval(display, 1000);
@@ -36,11 +43,17 @@ function display() {
 		var currentMin = Math.floor(timeLeft / 60);
 		$minutes.val(currentMin < 10? '0' + currentMin: currentMin);
 		$secs.val(currentSecs < 10? '0' + currentSecs: currentSecs);
+	}else if (timeLeft == 0) {
+		pomodoro++;
+		$('#alarm')[0].play();
+		timeLeft = Math.floor(workTime / 5);
+		$minutes.val(currentMin < 10? '0' + currentMin: currentMin);
+		$secs.val(currentSecs < 10? '0' + currentSecs: currentSecs);
 	}else {
-		$minutes.val('00');
-		$secs.val('00');
-		clearInterval(interval);
+		return
 	}
+		$minutes.val(currentMin < 10? '0' + currentMin: currentMin);
+		$secs.val(currentSecs < 10? '0' + currentSecs: currentSecs);
 }
 
 $stopBtn.on('click', function() {

@@ -10,8 +10,8 @@
             <hr/>
             <div id="pomodoro">
                 <div class="information">
-                    <div class="inform">1</div>
-                    <div class="inform">1/4</div>
+                    <div class="inform">full round: <span>0</span></div>
+                    <div class="inform">Pomodoro: <span>0/4</span></div>
                 </div>
                 <div id="timer-counter">
                     <div id="timer">
@@ -26,6 +26,9 @@
                     <button id="stop">stop</button>
                 </div>
             </div>
+            <audio id="alarm">
+                <source src="sound/alarm.mp3" type="audio/mpeg">
+            </audio>
         </div>
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
