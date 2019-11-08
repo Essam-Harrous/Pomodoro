@@ -1,22 +1,44 @@
 
-var start-btn = $('#start');
-var stop-btn = $('#stop')
+var $startBtn = $('#start');
+var $stopBtn = $('#stop');
+var $minutes = $('#minutes')
+var $secs = $('#secs')
+var timeLeft = 0;
+var interva = 0;
 
-start-btn.on('click', function(){
-	var minutes = $('#minutes').text();
-	var secs = $('#secs').text();
-    start.attr('disable', 'true');
+$startBtn.on('click', function(){
+	var minutes = $minutes.val();
+	var secs = $secs.val();
+    $startBtn.attr('disabled', 'true');
+    $minutes.attr('disabled', 'true');
+    $secs.attr('disabled', 'true');
+    timeLeft = timeInSecs(minutes, secs);
 
-    var interval = setInterval(startTimer(minutes, secs), 1000);
+    interval = setInterval(startTimer, 1000);
 
 })
 
-startTimer(minutes, secs) {
+function timeInSecs(minutes, secs) {
+	return parseInt(minutes) * 60 + parseInt(secs);
+}
 
-	
+function startTimer() {
+	timeLeft--
+	display(timeLeft);
+}
 
-	if (secs > 0) {
-		secs--
-
+function display(timeLeft) {
+	if (timeLeft != 0) {
+		var currentSecs = timeLeft % 60;
+		var currentMin = Math.floor(timeLeft / 60);
+		$minutes.val(currentMin < 10? '0' + currentMin: currentMin);
+		$secs.val(currentSecs < 10? '0' + currentSecs: currentSecs);
 	}
 }
+
+$stopBtn.on('click', function() {
+	clearInterval(interval)
+    $startBtn.removeAttr('disabled');
+    $minutes.removeAttr('disabled');
+    $secs.removeAttr('disabled');
+})

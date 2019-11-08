@@ -25,9 +25,18 @@
 }
 
 #timer {
-    padding: 18% 15%;
+    display: flex;
+    padding: 7rem 3rem;
     margin: 8% 29%;
     border: 2px solid rgb(71, 70, 70);
     border-radius: 50%;
 }
 
+.inputs {
+    width: 20px;
+}
+
+.inputs::-webkit-inner-spin-button, 
+.inputs::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
