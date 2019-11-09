@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+    background-color: #3e5382d6;
 }
 #container {
     text-align: center;
@@ -9,10 +10,11 @@ body {
 
 #pomodoro {
     width: 60%;
-    border: 2px solid rgb(99, 93, 93);
+    border: 2px solid rgba(99, 93, 93, 0.73);
+    box-shadow: 5px 8px 10px 6px #888888;
     border-radius: 10px;
     margin: 60px auto 0 auto;
-    background-color: #43ff8b;
+    background-color: #4fdf86eb;
 }
 
 .information {
@@ -67,14 +69,19 @@ body {
 }
 
 .container .box canvas {
-    width: 250px;
-    height: 250px;
+    height: 190px !important;
+    width: 190px !important;
     position: absolute;
-    top: -70px;
-    left: -53px;
+    top: -40px;
+    left: -22px;
     z-index: 0;
 }
 
 .inform:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
+    transition-duration: 0.5s
+}
+
+.inform {
+    outline: none;
 }
