@@ -6,42 +6,43 @@ var $minutes = $('#minutes')
 var $secs = $('#secs')
 var $fullPomodoro = $('#fullPomodoro');
 var $pomodoroPart = $('#pomodoroPart');
+
+//count the pomodor done
 var pomodoro = 0;
+
+//count fullPomodoro
 var fullPomodoro = 0
+
+//keep track of the time
 var timeLeft = 0;
+
+//save the full work time
 var workTime = 0;
+
+//for interval id
 var interval = 0;
+
+//check the first click so you can save you full time work
 var firstClick = true;
+
+//check if it's break time or not
 var breakTime = false;
 
 var $chart = $('#chart');
 
+//it invokes startTimer function when click the start button
 $startBtn.on('click', function(){
-	$stopBtn.removeAttr('disabled');
-	var minutes = $minutes.val();
-	var secs = $secs.val();
-	if (/[e.+-]/.test(minutes) || /[e.+-]/.test(secs) || '' === secs || '' === minutes) {
-		alert("don't do it again HIRs")
-	}
-    $startBtn.attr('disabled', 'true');
-    $minutes.attr('disabled', 'true');
-    $secs.attr('disabled', 'true');
-    if (firstClick) {
-		workTime = timeInSecs(minutes, secs);
-		console.log(workTime, 'fsfs');
-		firstClick = false;
-    }
-    timeLeft = timeInSecs(minutes, secs);
-
-    interval = setInterval(display, 1000);
+	startTimer();
 
 })
 
+//calculate the time in secone to be easy to manipulate
 function timeInSecs(minutes, secs) {
 	return parseInt(minutes) * 60 + parseInt(secs);
 }
 
 
+//it minimize the time left and it displays the current time
 function display() {
 	timeLeft--;
 	if (timeLeft === 0) {
@@ -66,6 +67,8 @@ function display() {
 		}else {
 			timeLeft = workTime;
 		}
+		stopTimer();
+		setTimeout(startTimer, 6000)
 	}else {
 		if (breakTime && pomodoro == 0) {
 			$chart.data('easyPieChart').update(timeLeft * 100 / (workTime / 5 * 3))
@@ -80,14 +83,15 @@ function display() {
 	var currentMin = Math.floor(timeLeft / 60);
 	$minutes.val(currentMin < 10? '0' + currentMin: currentMin);
 	$secs.val(currentSecs < 10? '0' + currentSecs: currentSecs);
+
 }
 
+//it invokes the stop timer function when it invokes
 $stopBtn.on('click', function() {
-    $stopBtn.attr('disabled', 'true');
-	clearInterval(interval)
-	$startBtn.removeAttr('disabled');
+    stopTimer();
 })
 
+//it reset all the vriables when reset button clicked
 $resetBtn.on('click', function() {
 	clearInterval(interval);
 	$minutes.val('25');
@@ -108,3 +112,34 @@ $resetBtn.on('click', function() {
 	breakTime = false;
 
 })
+
+//it disable the stop button, clear the interval so stop the timer and display the start button
+function stopTimer() {
+    $stopBtn.attr('disabled', 'true');
+	clearInterval(interval)
+	$startBtn.removeAttr('disabled');
+}
+
+
+//it takes the minutes and seconds from the input..
+//and disable the start button
+//it save the work time and it use set interval to call display function
+function startTimer() {
+	$stopBtn.removeAttr('disabled');
+	var minutes = $minutes.val();
+	var secs = $secs.val();
+	if (/[e.+-]/.test(minutes) || /[e.+-]/.test(secs) || '' === secs || '' === minutes) {
+		alert("don't do it again HIRs")
+	}
+    $startBtn.attr('disabled', 'true');
+    $minutes.attr('disabled', 'true');
+    $secs.attr('disabled', 'true');
+    if (firstClick) {
+		workTime = timeInSecs(minutes, secs);
+		firstClick = false;
+    }
+    timeLeft = timeInSecs(minutes, secs);
+
+    interval = setInterval(display, 1000);
+
+}
